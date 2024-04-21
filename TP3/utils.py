@@ -7,17 +7,17 @@ Created on Wed Apr  3 10:31:53 2024
 """
 from os import listdir
 
-def read_corpus(f):
+def read_corpus(f,n=-1):
     with open(f,"r",encoding="utf-8") as flux:
         texte = flux.read()
-        texte = texte.replace('\n', '')
-        
         dic = {}
-        for lettre in texte:
-            if lettre in dic:
-                dic[lettre] += 1
+        i  =0
+        while (i <= n or n == -1) and i < len(texte):
+            if texte[i] in dic:
+                dic[texte[i]] += 1
             else:
-                dic[lettre] = 1
+                dic[texte[i]] = 1
+            i += 1
                 
         longueur = len(texte)
         
@@ -25,14 +25,20 @@ def read_corpus(f):
    
 
 
-def read_references(dirpath):
+def read_references(dirpath,n=-1):
     fichiers = listdir(dirpath)
     dic = {}
     for fichier in fichiers:
         file_path = str(dirpath)+ fichier
-        dic[fichier] = read_corpus(file_path)
+        dic[fichier] = read_corpus(file_path,n=-1)
     return dic
-         
-print(read_references("Data\\Data\\Test\\"))
 
+
+
+def evaluation(train,test,n=-1):
+    train_dic = read_references(train,n)
+    test_dic = read_references(test,n)
+        
+evaluation('Data\\Data\\Train\\','Data\\Data\\Test\\')
+    
     
