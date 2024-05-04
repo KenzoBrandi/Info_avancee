@@ -34,11 +34,5 @@ def read_references(dirpath,n=-1):
     return dic
 
 
-
-def evaluation(train,test,n=-1):
-    train_dic = read_references(train,n)
-    test_dic = read_references(test,n)
         
-evaluation('Data\\Data\\Train\\','Data\\Data\\Test\\')
-    
     
